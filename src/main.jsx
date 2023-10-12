@@ -1,16 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from './App.jsx'
-import Profile from "./components/Profile.jsx"
-
+import App from './App.jsx';
+import Leaderboard from "./components/Leaderboard.jsx";
+import ChooseScene from './components/Choose-Scene.jsx';
+import Game from './components/Game.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "profile", element: <Profile /> },
+      { index: true, element: <ChooseScene/> },
+      { path: "leaderboard", element: <Leaderboard />},
+      { path: "game", element: <Game />}
     ],
 
   },

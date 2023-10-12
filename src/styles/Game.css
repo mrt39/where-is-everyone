@@ -1,0 +1,19 @@
+.game-container{
+    margin-top: 5rem;
+}
+
+.custom-marker{
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid red;
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    top: -1.5rem;
+    left: -1.5rem
+}
+
+.image-marker__image{
+    user-select: none;
+    cursor: pointer;
+}
