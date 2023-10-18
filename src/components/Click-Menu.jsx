@@ -10,7 +10,7 @@ import MasAmeddaImg from "../assets/images/mas-amedda.png"
 import MaceWinduImg from "../assets/images/mace-windu.png"
 import ObiWanImage from "../assets/images/obi-wan.png"
 
-export default function ClickMenu({clickCoordinates, setclickMenuDisplay, clickMenuDisplay, open, targetCharacterCoordinates}) {
+export default function ClickMenu({clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, clickMenuDisplay, open, targetCharacterCoordinates}) {
 
   function handleMenuClick(name) {
     //close the menu
@@ -21,16 +21,23 @@ export default function ClickMenu({clickCoordinates, setclickMenuDisplay, clickM
 
     //as the image adjusts the current window size, coordinates of the characters will be calculated based on the current window size as well
     //coordinates are calculated based on the formula here: https://stackoverflow.com/questions/32870568/how-to-recalculate-x-y-coordinates-based-on-screensize 
-    let currentScreenSizeX= window.innerWidth
-    let currentScreenSizeY= window.innerHeight
 
-    console.log("Clicked X coordinates should be between: " + targetCharacterCoordinates[name]["x"][0] * currentScreenSizeX + " and " + targetCharacterCoordinates[name]["x"][1] * currentScreenSizeX)
+    //scrollwidth-scrollheight: https://stackoverflow.com/questions/22675126/what-is-offsetheight-clientheight-scrollheight
+    let currentScreenSizeX= document.documentElement.scrollWidth;
+    let currentScreenSizeY= document.documentElement.scrollHeight;
 
-    if (between(clickCoordinates[0], targetCharacterCoordinates[name]["x"][0] * currentScreenSizeX, targetCharacterCoordinates[name]["x"][1] * currentScreenSizeX)) {
-        console.log("Found Darth Vader!")
+    console.log("Clicked X coordinates for this character should be between: " + targetCharacterCoordinates[name]["x"][0] * currentScreenSizeX + " and " + targetCharacterCoordinates[name]["x"][1] * currentScreenSizeX)
+
+    console.log("Clicked Y coordinates for this character should be between: " + targetCharacterCoordinates[name]["y"][0] * currentScreenSizeY + " and " + targetCharacterCoordinates[name]["y"][1] * currentScreenSizeY)
+
+    console.log("Current screen size X = " + currentScreenSizeX)
+    console.log("Current screen size Y = " + currentScreenSizeY)
+
+    if (between(clickCoordinates[0], targetCharacterCoordinates[name]["x"][0] * currentScreenSizeX, targetCharacterCoordinates[name]["x"][1] * currentScreenSizeX) && between (clickCoordinates[1], targetCharacterCoordinates[name]["y"][0] * currentScreenSizeY, targetCharacterCoordinates[name]["y"][1] * currentScreenSizeY)) {
+        console.log("Found " + name)
     }
     else{
-      console.log("Couldn't find Darth Vader")
+      console.log("Couldn't find " + name)
     }
 
 
@@ -83,23 +90,23 @@ export default function ClickMenu({clickCoordinates, setclickMenuDisplay, clickM
         /* adjusting position for the menu to appear on mouse click position
         https://mui.com/material-ui/react-popover/#anchor-playground*/
         anchorReference="anchorPosition"
-        anchorPosition={{ top: clickCoordinates[1]+40, left: clickCoordinates[0]-53 }}
+        anchorPosition={{ top: clickCoordinatesClientScreen[1]+40, left: clickCoordinatesClientScreen[0]-53 }}
         transformOrigin={{ horizontal: "center", vertical: "top" }}
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
       >
         <MenuItem onClick={() => handleMenuClick("Darth Vader")}>
           <Avatar alt="Darth Vader" src={DarthVaderImg} /> Darth Vader
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={() => handleMenuClick("Mace Windu")}>
           <Avatar  alt="Mace Windu" src={MaceWinduImg} /> Mace Windu
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={() => handleMenuClick("Chewbacca")}>
           <Avatar  alt="Chewbacca" src={ChewbaccaImg} /> Chewbacca
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={() => handleMenuClick("Mas Amedda")}>
           <Avatar  alt="Mas Amedda" src={MasAmeddaImg} /> Mas Amedda
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={() => handleMenuClick("Obi-Wan")}>
           <Avatar  alt="Obi-Wan" src={ObiWanImage} /> Obi-Wan
         </MenuItem>
       </Menu>

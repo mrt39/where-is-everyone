@@ -1,5 +1,5 @@
 .game-container{
-    margin-top: 5rem;
+    margin-top: 56px;
 }
 
 .custom-marker{
@@ -12,6 +12,7 @@
     top: -1.5rem;
     left: -1.5rem
 }
+
 
 .image-marker__image{
     user-select: none;
