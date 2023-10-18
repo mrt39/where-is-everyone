@@ -1,13 +1,17 @@
+import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import '../styles/Game.css';
 import StarWars from "../assets/images/star-wars.jpg"
 import ImageMarker from 'react-image-marker';
 import ClickMenu from './Click-Menu';
 import SnackBar from "./SnackBar";
-import $ from 'jquery';
+
 
 
 export default function Game() {
+
+  {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
+  const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates] = useOutletContext();
 
   const [markers, setMarkers] = useState([]);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -18,8 +22,6 @@ export default function Game() {
   const [clickMenuDisplay, setclickMenuDisplay] = useState(false);
   const [clickCoordinates, setclickCoordinates] = useState([]);
   const [clickCoordinatesClientScreen, setclickCoordinatesClientScreen] = useState([])
-  const [targetCharacters, setTargetCharacters] = useState([]);
-  const [targetCharacterCoordinates, settargetCharacterCoordinates] = useState({});
 
   const open = Boolean(clickMenuDisplay);
   const handleImageClick = (event) => {
@@ -45,6 +47,7 @@ export default function Game() {
     setclickCoordinates([x, y])
     setclickCoordinatesClientScreen([clientScreenX, clientScreenY])
     console.log("You clicked on these coordinates: " + clickCoordinates)
+    console.log(scene)
   }
 
   //custom marker setting for image marker: https://www.npmjs.com/package/react-image-marker
@@ -54,24 +57,6 @@ export default function Game() {
     );
   };
 
-
-
-  //create characters for finding in game 
-  function createCharacters(){
-    setTargetCharacters(["Darth Vader", "Mace Windu", "Chewbacca", "Mas Amedda", "Obi-Wan"])
-    /* coordinates are calculated based on the formula here: https://stackoverflow.com/questions/32870568/how-to-recalculate-x-y-coordinates-based-on-screensize  */
-    settargetCharacterCoordinates({"Darth Vader": {"x": [0.8868, 0.9384], "y": [0.3725, 0.4246] },
-    "Mace Windu" : {"x":[0.1355, 0.1751] , "y":[0.4770, 0.5324]},
-    "Chewbacca" : {"x":[0.8087, 0.8541] , "y": [0.8219, 0.8674]},
-    "Mas Amedda": {"x":[0.2653, 0.3179] , "y":[0.608, 0.6735]},
-    "Obi-Wan": {"x":[0.2122, 0.2569] , "y":[0.1634, 0.2274]}
-  })
-  }
-
-  //create characters once the page is loaded
-  useEffect(() => {
-    createCharacters()
-  }, [])
 
 
   return (
@@ -89,14 +74,16 @@ export default function Game() {
         </div>
         <div >
             <ClickMenu
+            scene={scene}
+            targetCharacters= {targetCharacters}
             clickCoordinates= {clickCoordinates}
             clickMenuDisplay = {clickMenuDisplay}
             setclickMenuDisplay = {setclickMenuDisplay}
-            targetCharacterCoordinates = {targetCharacterCoordinates}
+            targetCharactersWithCoordinates = {targetCharactersWithCoordinates}
             clickCoordinatesClientScreen = {clickCoordinatesClientScreen}
             setSnackBarOpen = {setSnackBarOpen}
             manageSnackBarSettings={manageSnackBarSettings}
-            open = {open}
+            open={open}
             />
         </div>
       {/* snackbar from MUI */}

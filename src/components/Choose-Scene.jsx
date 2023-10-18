@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
+{/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
+import { useOutletContext } from "react-router-dom";
 import '../styles/Choose-Scene.css';
 import FrameStarWars from "../assets/images/frame-star-wars.png"
 
 
 
-export default function ChooseScene({setScene}) {
+export default function ChooseScene() {
+
+  const [scene, setScene] = useOutletContext();
+
+
   return (
     <div className='choose-scene-container'>
         Choose a Scene:
@@ -13,7 +19,7 @@ export default function ChooseScene({setScene}) {
         <Link to="leaderboard">Link to leaderboard</Link>
         </p>
     <Link to="game"
-    onClick={setScene("starWars")}
+    onClick={function() {setScene("Star Wars"); console.log(scene)}}
     >
       <div className = "container">
         <div className = "card">
