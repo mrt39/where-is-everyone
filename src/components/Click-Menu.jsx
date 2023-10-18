@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-
-import * as React from "react";
+import {useState} from "react";
+import * as React from 'react';
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,8 +10,9 @@ import MasAmeddaImg from "../assets/images/mas-amedda.png"
 import MaceWinduImg from "../assets/images/mace-windu.png"
 import ObiWanImage from "../assets/images/obi-wan.png"
 
-export default function ClickMenu({clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, clickMenuDisplay, open, targetCharacterCoordinates}) {
+export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, clickMenuDisplay, open, targetCharacterCoordinates}) {
 
+  
   function handleMenuClick(name) {
     //close the menu
     setclickMenuDisplay(null);
@@ -35,12 +36,14 @@ export default function ClickMenu({clickCoordinates, clickCoordinatesClientScree
 
     if (between(clickCoordinates[0], targetCharacterCoordinates[name]["x"][0] * currentScreenSizeX, targetCharacterCoordinates[name]["x"][1] * currentScreenSizeX) && between (clickCoordinates[1], targetCharacterCoordinates[name]["y"][0] * currentScreenSizeY, targetCharacterCoordinates[name]["y"][1] * currentScreenSizeY)) {
         console.log("Found " + name)
+        manageSnackBarSettings(true, name)
+        setSnackBarOpen(true);
     }
     else{
       console.log("Couldn't find " + name)
+      manageSnackBarSettings(false)
+      setSnackBarOpen(true);
     }
-
-
 
     /* TODO: add the same check for dimension Y 
     if found, remove from the targetCharacters array so it doesn't get displayed

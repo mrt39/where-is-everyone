@@ -3,12 +3,18 @@ import '../styles/Game.css';
 import StarWars from "../assets/images/star-wars.jpg"
 import ImageMarker from 'react-image-marker';
 import ClickMenu from './Click-Menu';
+import SnackBar from "./SnackBar";
 import $ from 'jquery';
 
 
 export default function Game() {
 
   const [markers, setMarkers] = useState([]);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [snackBarSettings, setSnackBarBarSettings] = useState({
+    success: false,
+    clickedName: ""
+  });
   const [clickMenuDisplay, setclickMenuDisplay] = useState(false);
   const [clickCoordinates, setclickCoordinates] = useState([]);
   const [clickCoordinatesClientScreen, setclickCoordinatesClientScreen] = useState([])
@@ -20,6 +26,11 @@ export default function Game() {
     setclickMenuDisplay(event.currentTarget);
   };
 
+  function manageSnackBarSettings(success, clickedName){
+    setSnackBarBarSettings({success: success, 
+      clickedName: clickedName})
+  }
+
   function getClickCoordinates(event) {
 
     /* pageX/Y coordinates are relative to the top left corner of the whole rendered page (including parts hidden by scrolling),
@@ -30,19 +41,6 @@ export default function Game() {
     //clicked coordinates based on client's screen
     let clientScreenX = event.clientX;
     let clientScreenY = event.clientY;
-
-
-/*     //get the coordinates in relation to viewport 
-    //https://stackoverflow.com/questions/71296608/get-vw-vh-position-from-onclick-event-in-js
-    let viewportX = x / window.innerWidth * 100 
-    let viewportY = y / window.innerHeight * 100  */
-
-/*     // e = Mouse click event.
-    var rect = event.target.getBoundingClientRect();
-    var x = event.clientX - rect.left; //x position within the element.
-    var y = event.clientY - rect.top;  //y position within the element.
-    console.log("Left : " + x + " ; Top : " + y + "."); */
-
 
     setclickCoordinates([x, y])
     setclickCoordinatesClientScreen([clientScreenX, clientScreenY])
@@ -79,7 +77,7 @@ export default function Game() {
   return (
     <div className='game-container'>
         <div
-        onClick={() =>  {handleImageClick(event); getClickCoordinates(event);}}>
+        onClick={() =>  {handleImageClick(event); getClickCoordinates(event); setSnackBarOpen(false)}}>
             <ImageMarker
             /* using imageMarket to get a marker on image onclick 
             https://www.npmjs.com/package/react-image-marker */
@@ -96,9 +94,17 @@ export default function Game() {
             setclickMenuDisplay = {setclickMenuDisplay}
             targetCharacterCoordinates = {targetCharacterCoordinates}
             clickCoordinatesClientScreen = {clickCoordinatesClientScreen}
+            setSnackBarOpen = {setSnackBarOpen}
+            manageSnackBarSettings={manageSnackBarSettings}
             open = {open}
             />
         </div>
+      {/* snackbar from MUI */}
+      <SnackBar
+      snackBarOpen = {snackBarOpen}
+      setSnackBarOpen = {setSnackBarOpen}
+      snackBarSettings = {snackBarSettings}
+      />
     </div>
   );
 }

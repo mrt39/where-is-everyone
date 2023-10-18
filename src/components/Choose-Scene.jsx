@@ -5,15 +5,16 @@ import FrameStarWars from "../assets/images/frame-star-wars.png"
 
 
 
-export default function ChooseScene() {
+export default function ChooseScene({setScene}) {
   return (
     <div className='choose-scene-container'>
-
         Choose a Scene:
         <p>
         <Link to="leaderboard">Link to leaderboard</Link>
         </p>
-    <Link to="game">
+    <Link to="game"
+    onClick={setScene("starWars")}
+    >
       <div className = "container">
         <div className = "card">
           <div className = "image">
