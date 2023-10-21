@@ -9,10 +9,14 @@ import Navbar from "./components/Navbar.jsx"
 
 const App = () => {
 
-  const [scene, setScene] = useState("");
+  const [scene, setScene] = useState();
   const [targetCharacters, setTargetCharacters] = useState({
-    "Star Wars": ["Darth Vader", "Mace Windu", "Chewbacca", "Mas Amedda", "Obi-Wan"]
+    "star-wars": [{name: "Darth Vader", found: false}, {name: "Mace Windu", found: false}, {name: "Chewbacca", found: false}, {name: "Mas Amedda", found: false}, {name: "Obi-Wan", found: false}]
   });
+  // state to store time from stopwatch
+    const [time, setTime] = useState(0);
+  // state to check whether stopwatch is running
+  const [isRunning, setIsRunning] = useState(false);
 
   const targetCharactersWithCoordinates = {
   "Star Wars": {"Darth Vader": {"X": [0.8868, 0.9384], "y": [0.3725, 0.4246] },
@@ -26,9 +30,16 @@ const App = () => {
     <div>
       <Navbar
       scene = {scene}
+      setScene={setScene}
+      targetCharacters = {targetCharacters}
+      time = {time}
+      setTime = {setTime}
+      isRunning = {isRunning}
+      setIsRunning = {setIsRunning}
+      setTargetCharacters={setTargetCharacters}
       />
       {/* "context" is how you pass props to Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
-      <Outlet  context={[scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates]} /> 
+      <Outlet  context={[scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning]} /> 
     </div>
   );
 };

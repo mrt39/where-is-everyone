@@ -6,6 +6,7 @@ import Leaderboard from "./components/Leaderboard.jsx";
 import ChooseScene from './components/Choose-Scene.jsx';
 import Game from './components/Game.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,7 +14,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <ChooseScene/> },
       { path: "leaderboard", element: <Leaderboard />},
-      { path: "game", element: <Game />}
+      { path: "game", element: <Game />},
+
     ],
 
   },

@@ -5,13 +5,13 @@ import StarWars from "../assets/images/star-wars.jpg"
 import ImageMarker from 'react-image-marker';
 import ClickMenu from './Click-Menu';
 import SnackBar from "./SnackBar";
-
+import GameWonModal from "./Modal";
 
 
 export default function Game() {
 
   {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
-  const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates] = useOutletContext();
+  const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning] = useOutletContext();
 
   const [markers, setMarkers] = useState([]);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -22,9 +22,26 @@ export default function Game() {
   const [clickMenuDisplay, setclickMenuDisplay] = useState(false);
   const [clickCoordinates, setclickCoordinates] = useState([]);
   const [clickCoordinatesClientScreen, setclickCoordinatesClientScreen] = useState([])
+  const [gameWonModalOpen, setgameWonModalOpen] = useState(false);
+
+
+  //start timer when rendered first time
+  useEffect(() => {
+    setIsRunning(true);
+  }, []);
+
+
+  //open modal when game is won
+  const handleModalOpen = () => {
+    setgameWonModalOpen(true);
+  };
 
   const open = Boolean(clickMenuDisplay);
   const handleImageClick = (event) => {
+    //if all characters have been found, don't open any menu and return
+    if(targetCharacters[scene].every((character) => character.found === true)){
+      return
+    }
     setclickMenuDisplay(event.currentTarget);
   };
 
@@ -76,22 +93,31 @@ export default function Game() {
             <ClickMenu
             scene={scene}
             targetCharacters= {targetCharacters}
+            setTargetCharacters={setTargetCharacters}
             clickCoordinates= {clickCoordinates}
             clickMenuDisplay = {clickMenuDisplay}
             setclickMenuDisplay = {setclickMenuDisplay}
+            handleModalOpen = {handleModalOpen}
             targetCharactersWithCoordinates = {targetCharactersWithCoordinates}
             clickCoordinatesClientScreen = {clickCoordinatesClientScreen}
             setSnackBarOpen = {setSnackBarOpen}
             manageSnackBarSettings={manageSnackBarSettings}
             open={open}
+            setIsRunning={setIsRunning}
             />
         </div>
-      {/* snackbar from MUI */}
-      <SnackBar
-      snackBarOpen = {snackBarOpen}
-      setSnackBarOpen = {setSnackBarOpen}
-      snackBarSettings = {snackBarSettings}
-      />
+        {/* snackbar from MUI */}
+        <SnackBar
+        snackBarOpen = {snackBarOpen}
+        setSnackBarOpen = {setSnackBarOpen}
+        snackBarSettings = {snackBarSettings}
+        />
+        <GameWonModal
+        gameWonModalOpen = {gameWonModalOpen}
+        setgameWonModalOpen = {setgameWonModalOpen}
+        time = {time}
+        />
+        
     </div>
   );
 }

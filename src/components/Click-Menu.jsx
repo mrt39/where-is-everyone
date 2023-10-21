@@ -1,17 +1,18 @@
 /* eslint-disable react/prop-types */
 import {useState} from "react";
 import * as React from 'react';
+import '../styles/Click-Menu.css';
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 
-export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, clickMenuDisplay, open, scene, targetCharacters, targetCharactersWithCoordinates}) {
+export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, handleModalOpen, setIsRunning, clickMenuDisplay, open, scene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates}) {
 
-  
   function handleMenuClick(name) {
     //close the menu
     setclickMenuDisplay(null);
+
     //if the clicked character has correct coordinates, display success
 
     //as the image adjusts the current window size, coordinates of the characters will be calculated based on the current window size as well
@@ -32,6 +33,22 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         console.log("Found " + name)
         manageSnackBarSettings(true, name)
         setSnackBarOpen(true);
+        /* turn the "found" property of the targetCharacters state to "true" */
+        //find index
+        var index = targetCharacters[scene].findIndex((character) => character.name === name);
+        //copy the object
+        const copiedobject = {...targetCharacters}
+        //alter the copied object
+        copiedobject[scene][index].found = true
+        //change state
+        setTargetCharacters(copiedobject)
+        console.log(targetCharacters)
+        //if all characters have been found, open the score entry modal
+        if(targetCharacters[scene].every((character) => character.found === true)){
+          handleModalOpen()
+          //stop the timer
+          setIsRunning(false);
+        }
     }
     else{
       console.log("Couldn't find " + name)
@@ -87,10 +104,9 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         transformOrigin={{ horizontal: "center", vertical: "top" }}
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
       >
-
       {targetCharacters[scene].map((character) =>
-        <MenuItem key={character} onClick={() => handleMenuClick(character)}>
-          <Avatar alt={character} src={`./src/assets/images/${character}.png`} /> {character}
+        <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
+          <Avatar alt={character.name} src={`./src/assets/images/${character.name}.png`} /> {character.name}
         </MenuItem>
       )}
 
