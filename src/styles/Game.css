@@ -10,11 +10,23 @@
     position: absolute;
     border-radius: 50%;
     top: -1.5rem;
-    left: -1.5rem
+    left: -1.5rem;
 }
 
 
 .image-marker__image{
     user-select: none;
     cursor: pointer;
+}
+
+.class-nozzeCana{
+    aspect-ratio: 1850/1257;
+}
+
+.class-starWars{
+    aspect-ratio: 1850/2803;
+}
+
+.class-festival{
+    aspect-ratio: 1850/2381;
 }

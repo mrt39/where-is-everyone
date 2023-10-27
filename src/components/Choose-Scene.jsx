@@ -20,7 +20,16 @@ export default function ChooseScene() {
           clickedScene="star-wars"
           displayName="Star Wars"
           />
-
+          <Frame
+          setScene={setScene}
+          clickedScene="nozze-cana"
+          displayName="Nozze di Cana"
+          />
+          <Frame
+          setScene={setScene}
+          clickedScene="festival"
+          displayName="Festival"
+          />
     </div>
   );
 }

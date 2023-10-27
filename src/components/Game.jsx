@@ -1,7 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import '../styles/Game.css';
-import StarWars from "../assets/images/star-wars.jpg"
 import ImageMarker from 'react-image-marker';
 import ClickMenu from './Click-Menu';
 import SnackBar from "./SnackBar";
@@ -25,10 +24,10 @@ export default function Game() {
   const [gameWonModalOpen, setgameWonModalOpen] = useState(false);
 
 
-  //start timer when rendered first time
+/*   //start timer when rendered first time
   useEffect(() => {
     setIsRunning(true);
-  }, []);
+  }, []); */
 
 
   //open modal when game is won
@@ -54,17 +53,49 @@ export default function Game() {
 
     /* pageX/Y coordinates are relative to the top left corner of the whole rendered page (including parts hidden by scrolling),
     https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y */
-    let x = event.pageX;
-    let y = event.pageY; 
+/*     let x = event.pageX;
+    let y = event.pageY;   */
 
-    //clicked coordinates based on client's screen
+    //clicked coordinates based on client's screen, calculating for making menu appear on screen after click.
     let clientScreenX = event.clientX;
     let clientScreenY = event.clientY;
 
-    setclickCoordinates([x, y])
+    /* setclickCoordinates([x, y]) */
     setclickCoordinatesClientScreen([clientScreenX, clientScreenY])
-    console.log("You clicked on these coordinates: " + clickCoordinates)
-    console.log(scene)
+
+    //find the clicked coordinates ON THE image, not the screen size.
+    //https://stackoverflow.com/questions/49807088/javascript-get-x-y-coordinates-of-click-in-image
+    var xCoordinate = event.offsetX;
+    var yCoordinate = event.offsetY;
+
+    console.log("Clicked X coordinate: " + xCoordinate)
+    console.log("Clicked Y coordinate: " + yCoordinate)
+
+     setclickCoordinates([xCoordinate, yCoordinate])  
+
+
+/*     console.log("You clicked on these coordinates: " + clickCoordinates)
+    console.log(scene) */
+  /*   let currentScreenSizeX= document.documentElement.scrollWidth;
+    let currentScreenSizeY= document.documentElement.scrollHeight; */
+/*     console.log("Current screen size X = " + currentScreenSizeX)
+    console.log("Current screen size Y = " + currentScreenSizeY) */
+  }
+
+/*   function clickImage (event){
+
+ 
+  } */
+
+  //add class to the image which is rendered by the imagemarker component, based on the scene. this will set up the aspect ratio of the image.
+  function addClasstoImg (){
+     if (scene == "star-wars"){
+      return "gameImg class-starWars"
+    } else if (scene == "nozze-cana"){
+      return "gameImg class-nozzeCana"
+    } else if (scene == "festival"){
+      return "gameImg class-festival"
+    } 
   }
 
   //custom marker setting for image marker: https://www.npmjs.com/package/react-image-marker
@@ -79,14 +110,16 @@ export default function Game() {
   return (
     <div className='game-container'>
         <div
-        onClick={() =>  {handleImageClick(event); getClickCoordinates(event); setSnackBarOpen(false)}}>
+        onClick={() =>  {/* clickImage(event); */ handleImageClick(event); getClickCoordinates(event); setSnackBarOpen(false)}}>
             <ImageMarker
             /* using imageMarket to get a marker on image onclick 
             https://www.npmjs.com/package/react-image-marker */
-            src={StarWars}
+            src={`./src/assets/images/${scene}.jpg`}
             markers={markers}
             onAddMarker={(marker) => setMarkers([marker])}
             markerComponent={CustomMarker}
+            alt={"game image"}
+            extraClass={ addClasstoImg()}  
             />
         </div>
         <div >
