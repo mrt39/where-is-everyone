@@ -10,7 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, time}) {
+export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, time, scene}) {
 
 
     const [input, setInput] = useState("")
@@ -29,7 +29,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
         let result = await fetch(
         'http://localhost:5000/register', {
             method: "post",
-            body: JSON.stringify({ input, time }),
+            body: JSON.stringify({ input, time, scene }),
             headers: {
                 'Content-Type': 'application/json'
             }

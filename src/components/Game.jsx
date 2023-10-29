@@ -24,10 +24,10 @@ export default function Game() {
   const [gameWonModalOpen, setgameWonModalOpen] = useState(false);
 
 
-/*   //start timer when rendered first time
+  //start timer when rendered first time
   useEffect(() => {
     setIsRunning(true);
-  }, []); */
+  }, []);
 
 
   //open modal when game is won
@@ -53,14 +53,11 @@ export default function Game() {
 
     /* pageX/Y coordinates are relative to the top left corner of the whole rendered page (including parts hidden by scrolling),
     https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y */
-/*     let x = event.pageX;
-    let y = event.pageY;   */
 
     //clicked coordinates based on client's screen, calculating for making menu appear on screen after click.
     let clientScreenX = event.clientX;
     let clientScreenY = event.clientY;
 
-    /* setclickCoordinates([x, y]) */
     setclickCoordinatesClientScreen([clientScreenX, clientScreenY])
 
     //find the clicked coordinates ON THE image, not the screen size.
@@ -74,18 +71,8 @@ export default function Game() {
      setclickCoordinates([xCoordinate, yCoordinate])  
 
 
-/*     console.log("You clicked on these coordinates: " + clickCoordinates)
-    console.log(scene) */
-  /*   let currentScreenSizeX= document.documentElement.scrollWidth;
-    let currentScreenSizeY= document.documentElement.scrollHeight; */
-/*     console.log("Current screen size X = " + currentScreenSizeX)
-    console.log("Current screen size Y = " + currentScreenSizeY) */
   }
 
-/*   function clickImage (event){
-
- 
-  } */
 
   //add class to the image which is rendered by the imagemarker component, based on the scene. this will set up the aspect ratio of the image.
   function addClasstoImg (){
@@ -149,6 +136,7 @@ export default function Game() {
         gameWonModalOpen = {gameWonModalOpen}
         setgameWonModalOpen = {setgameWonModalOpen}
         time = {time}
+        scene = {scene}
         />
         
     </div>

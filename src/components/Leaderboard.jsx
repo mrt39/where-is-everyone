@@ -6,6 +6,7 @@ import LeaderboardTable from "./LeaderboardTable.jsx"
 const Leaderboard = () => {
 
     const [data, setData] = useState();
+    const [selectedScene, setSelectedScene] = useState();
 
     useEffect(() => {
       
@@ -18,7 +19,7 @@ const Leaderboard = () => {
       
       fetchData();  */
 
-        fetch('http://localhost:5000/leaderboard')
+        fetch('http://localhost:5000/leaderboard/'+ selectedScene)
           .then((res) => res.json())
           .then((jsondata) => {
             setData(jsondata)
@@ -27,18 +28,16 @@ const Leaderboard = () => {
             console.log(err.message);
           }); 
 
-    }, [])
+    }, [selectedScene])
 
 
     return (
-      <div>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
-        <h1>This is the leaderboard!</h1>
+      <div className='leaderboardContainer'>
+        <a href="#" onClick={() => setSelectedScene("star-wars")}>Star Wars </a>
+        <br />
+        <a href="#" onClick={() =>  setSelectedScene("festival")}>Festival </a>
+        <br />
+        <a href="#" onClick={() =>  setSelectedScene("nozze-cana")}>Nozze de Cana </a>
         <div>
           <LeaderboardTable
           data={data}/>

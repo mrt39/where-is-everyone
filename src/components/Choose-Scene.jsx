@@ -13,8 +13,12 @@ export default function ChooseScene() {
 
 
   return (
+    <>
+
     <div className='choose-scene-container'>
-        Choose a Scene:
+    <h1>        Choose a Scene:</h1>
+        <div className="frame-container">
+
           <Frame
           setScene={setScene}
           clickedScene="star-wars"
@@ -30,6 +34,8 @@ export default function ChooseScene() {
           clickedScene="festival"
           displayName="Festival"
           />
+          </div>
     </div>
+    </>
   );
 }

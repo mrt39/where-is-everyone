@@ -1,0 +1,13 @@
+.choose-scene-container{
+    margin-top: 10vh;
+    display: grid;
+    place-items: center;
+}
+
+.frame-container{
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

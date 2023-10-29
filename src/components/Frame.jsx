@@ -11,16 +11,19 @@ export default function Frame({setScene, clickedScene, displayName}) {
     <Link to="game"
     onClick={function(){setScene(clickedScene);}}
     >
-      <div className = "container">
-        <div className = "card">
-          <div className = "image">
-            <img href = "#" src ={`./src/assets/images/frame-${clickedScene}.png`}/>
-          </div>
-          <div className = "content">
-            <h3>{displayName}</h3>
-          </div>
-        </div>    
+    <article className="card">
+      <img
+        className="card__background"
+        src ={`./src/assets/images/frame-${clickedScene}.png`}
+        alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+
+      />
+      <div className="card__content | flow">
+        <div className="card__content--container | flow">
+          <h2 className="card__title">{displayName}</h2>
+        </div>
       </div>
+    </article>
     </Link>
   );
 }

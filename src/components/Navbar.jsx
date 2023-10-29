@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Timer from './Timer.jsx';
+import HeaderImg from "../assets/images/header.png"
 
 export default function Navbar({scene, targetCharacters, setTargetCharacters, time, setTime, isRunning, setIsRunning,setScene}) {
 
@@ -29,43 +30,57 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-    <div className="container-fluid">
-      <a className="navbar-brand" href="#">
-        <Link onClick={() => handleLogoClick()}
-        className="navbar-brand" to="/">Where is Everyone?</Link>
-      </a>
+      <div className="navbar-brand">
+         <Link className='navbarHeaderImg' onClick={() => handleLogoClick()}
+        to="/">  <img className='navbarHeaderImg' src={HeaderImg} alt="" /> </Link> 
+      </div>
       { scene?
       <div className='navbarRightSideContainer'>
+        <div className='navbarCharactersContainer'>
+       <Stack direction="row" spacing={2}>
+        {targetCharacters[scene].map((character) =>
+          <div key={character.name} className={`navbarAvatarContainer ${character.found? "characterFound" : null}`}>
+              <Avatar alt={character.name} 
+              className='navbarCharacterAvatar'
+              src={`./src/assets/images/${character.name}.png`} 
+              sx={{ width: 45, height: 45 }} 
+              /> {character.name}
+          </div>
+        )}
+      </Stack> 
+      </div>
+      <div className="nav-item dropdown dropdownBtn">
+          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul className="dropdown-menu">
+          {targetCharacters[scene].map((character) =>
+          <li key={character.name} className={`dropdown-character navbarAvatarContainer ${character.found? "characterFound" : null}`}>
+              <Avatar alt={character.name} 
+              className='navbarCharacterDropdownAvatar'
+              src={`./src/assets/images/${character.name}.png`} 
+              sx={{ width: 45, height: 45 }} 
+              /> {character.name}
+          </li>
+        )}
+          </ul>
+        </div>
     <Timer
       time = {time}
       setTime = {setTime}
       isRunning = {isRunning}
       setIsRunning = {setIsRunning}
     />
-      <Stack direction="row" spacing={2}>
-        {targetCharacters[scene].map((character) =>
-          <div key={character.name} className={`navbarAvatarContainer ${character.found? "characterFound" : null}`}>
-              <Avatar alt={character.name} 
-              src={`./src/assets/images/${character.name}.png`} 
-              sx={{ width: 45, height: 45 }} 
-              /> {character.name}
-          </div>
-        )}
-      </Stack>
-      <p className='navbarImageByTxt'>Image By xxxxxxx</p>
       </div>
       : 
-      <div>
-    
-        <a href="#">
-        <Link to="/leaderboard">Leaderboard</Link>
-        </a>
-        
-
-      </div>
+      <Link className="navbarLeaderboardLinkContainer" to="/leaderboard">
+        <div className='navbarLeaderboardLinkDiv'>
+          <p>Leaderboard</p>
+        </div>
+      </Link>
       }
 
-    </div>
+    
   </nav>
   );
 }

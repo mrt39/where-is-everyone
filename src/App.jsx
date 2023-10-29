@@ -12,7 +12,7 @@ const App = () => {
   const [scene, setScene] = useState();
   const [targetCharacters, setTargetCharacters] = useState({
     "star-wars": [{name: "Darth Vader", found: false}, {name: "Mace Windu", found: false}, {name: "Chewbacca", found: false}, {name: "Mas Amedda", found: false}, {name: "Obi-Wan", found: false}],
-    "festival": [{name: "Edgar Allen Poe", found: false}, {name: "Witch", found: false}, {name: "Robin Hood", found: false}, {name: "Erato", found: false}, {name: "Adam", found: false}],
+    "festival": [{name: "Robin Hood", found: false}, {name: "Witch", found: false}, {name: "Adam", found: false}, {name: "Erato", found: false}, {name: "Edgar Allen Poe", found: false}],
     "nozze-cana": [{name: "The Bride", found: false}, {name: "Paolo Veronese", found: false}, {name: "The Butcher", found: false}, {name: "Hourglass (Vanity)", found: false}, {name: "Suleiman the Magnificent", found: false}],
   });
   // state to store time from stopwatch
@@ -33,11 +33,11 @@ const App = () => {
   "Hourglass (Vanity)": {"X": [0,4883, 0.5175], "y": [0,7974, 0,8229] },
   "Suleiman the Magnificent" : {"X": [0.1245, 0.1781], "y": [0.6073, 0.7124] },},
 
-  "festival": {"Edgar Allen Poe": {"X": [0.2624, 0.3218], "y": [0.8483, 0.9184] },
+  "festival": {"Robin Hood": {"X": [0.8289, 0.9002], "y": [0.6178, 0.6933] },
   "Witch" : {"X": [0.1089, 0.1786], "y": [0.6418, 0.7223] },
-  "Robin Hood" : {"X": [0.8289, 0.9002], "y": [0.6178, 0.6933] },
+  "Adam" : {"X": [0.3754, 0.4278], "y": [0.1075, 0.1818]},
   "Erato": {"X": [0.8537, 0.9197], "y": [0.1609, 0.2423] },
-  "Adam" : {"X": [0.3754, 0.4278], "y": [0.1075, 0.1818] },},
+  "Edgar Allen Poe" : {"X": [0.2624, 0.3218], "y": [0.8483, 0.9184] },},
 
   
 }

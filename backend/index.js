@@ -26,6 +26,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
+    scene: {
+        type: String,
+        required: true,
+    },
+
     date: {
         type: Date,
         default: Date.now,
@@ -51,9 +57,12 @@ app.get("/", (req, res) => {
 
 });
 
-app.get("/leaderboard", async (req, res) => {
+app.get("/leaderboard/:scenename", async (req, res) => {
+
+    const sceneName = req.params.scenename // access URL variable
+
     try {
-      const users = await User.find({});
+      const users = await User.find({scene: sceneName});
       res.send(users);
 /*       return res.status(200).json({
         success: true,
@@ -73,7 +82,8 @@ app.post("/register", async (req, res) => {
     try {
         const newuser = new User({
             name: req.body.input,
-            time: req.body.time
+            time: req.body.time,
+            scene: req.body.scene
         });
         newuser.save();
  
