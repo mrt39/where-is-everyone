@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import { useTheme } from '@mui/material/styles';
+import '../styles/LeaderboardTable.css'
 import PropTypes from 'prop-types';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -105,10 +106,10 @@ function TablePaginationActions(props) {
 
 
 
-export default function LeaderboardTable({data}) {
+export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(25);
   
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -123,53 +124,78 @@ export default function LeaderboardTable({data}) {
       setPage(0);
     };
 
+    function manageTime(time){
+
+      // Hours calculation
+      const hours = Math.floor(time / 360000);
+
+      // Minutes calculation
+      const minutes = Math.floor((time % 360000) / 6000);
+
+      // Seconds calculation
+      const seconds = Math.floor((time % 6000) / 100);
+  
+      // Milliseconds calculation
+      const milliseconds = time % 100;
+
+      const timeDisplay = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(2, "0")}`
+
+      return timeDisplay
+  }
+
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
+          <TableRow className='tableTitleRow'>
+            <TableCell align="center" colspan="4" ><strong>{selectedSceneOnLeaderboard}</strong></TableCell>
+          </TableRow>
           <TableRow>
-            <TableCell align="center">Ranking</TableCell>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Time</TableCell>
-            <TableCell align="left">Date</TableCell>
+            <TableCell align="center"><strong>Ranking</strong></TableCell>
+            <TableCell align="center"><strong>Name</strong></TableCell>
+            <TableCell align="center"><strong>Time</strong></TableCell>
+            <TableCell align="center"><strong>Date</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {data? 
-          rows
+        { data? 
+          data
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((player) => (
+          .map((player, index) => (
             <TableRow
               key={player.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row" align="center">{player.name}</TableCell>
-              <TableCell align="left">{player.name}</TableCell>
-              <TableCell align="left"></TableCell>
-              <TableCell align="left"></TableCell>
+              <TableCell component="th" scope="row" align="center">{index+1}</TableCell>
+              <TableCell align="center">{player.name}</TableCell>
+              <TableCell align="center">{manageTime(player.time)}</TableCell>
+              <TableCell align="center">{player.date}</TableCell>
             </TableRow>
           ))
         :""}
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  'aria-label': 'rows per page',
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
+            {data? 
+            data.length > 25 &&
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    'aria-label': 'rows per page',
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            :""}
           </TableRow>
         </TableFooter>
       </Table>

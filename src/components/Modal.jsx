@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { redirect, useNavigate  } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import '../styles/Modal.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,10 +12,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, time, scene}) {
+export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, time, scene, setScene, setSelectedSceneOnLeaderboard}) {
 
+
+    const navigate = useNavigate();
 
     const [input, setInput] = useState("")
+    const [submitted, setSubmitted] = useState(false)
 
     const handleClose = () => {
         setgameWonModalOpen(false);
@@ -24,23 +29,43 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
         setInput(event.target.value)
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        let result = await fetch(
-        'http://localhost:5000/register', {
-            method: "post",
-            body: JSON.stringify({ input, time, scene }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        result = await result.json();
-        console.warn(result);
-        if (result) {
-            alert("Data saved succesfully");
-            setInput("");
-        }
+    function handleSubmit(event){
+        event.preventDefault()
+        setSubmitted(true)
     }
+
+    useEffect(() => {
+        async function postData() {
+            
+            let result = await fetch(
+            'http://localhost:5000/register', {
+                method: "post",
+                body: JSON.stringify({ input, time, scene }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            result = await result.json();
+            console.warn(result);
+            if (result) {
+                console.log("Data saved succesfully");
+                setInput("");
+            }   
+        }
+        
+        //after submit, redirect user to the leaderboard page
+        if (submitted ===true){
+        postData();
+        setSelectedSceneOnLeaderboard(scene);
+        setScene();
+        navigate("/leaderboard"); 
+        setSubmitted(false);
+        }
+    }, [submitted]);
+
+
+    
+
 
     function manageTime(){
 

@@ -10,7 +10,7 @@ import GameWonModal from "./Modal";
 export default function Game() {
 
   {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
-  const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning] = useOutletContext();
+  const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, ssetTime, isRunning, setIsRunning, selectedSceneOnLeaderboard,  setSelectedSceneOnLeaderboard] = useOutletContext();
 
   const [markers, setMarkers] = useState([]);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -137,6 +137,8 @@ export default function Game() {
         setgameWonModalOpen = {setgameWonModalOpen}
         time = {time}
         scene = {scene}
+        setScene={setScene}
+        setSelectedSceneOnLeaderboard= {setSelectedSceneOnLeaderboard}
         />
         
     </div>

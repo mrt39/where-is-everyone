@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar.jsx"
 const App = () => {
 
   const [scene, setScene] = useState();
+  const [selectedSceneOnLeaderboard, setSelectedSceneOnLeaderboard] = useState("star-wars");
+
   const [targetCharacters, setTargetCharacters] = useState({
     "star-wars": [{name: "Darth Vader", found: false}, {name: "Mace Windu", found: false}, {name: "Chewbacca", found: false}, {name: "Mas Amedda", found: false}, {name: "Obi-Wan", found: false}],
     "festival": [{name: "Robin Hood", found: false}, {name: "Witch", found: false}, {name: "Adam", found: false}, {name: "Erato", found: false}, {name: "Edgar Allen Poe", found: false}],
@@ -55,7 +57,7 @@ const App = () => {
       setTargetCharacters={setTargetCharacters}
       />
       {/* "context" is how you pass props to Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
-      <Outlet  context={[scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning]} /> 
+      <Outlet  context={[scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning, selectedSceneOnLeaderboard, setSelectedSceneOnLeaderboard]} /> 
     </div>
   );
 };

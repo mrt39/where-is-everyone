@@ -1,5 +1,9 @@
 // Import the mongoose module
 const mongoose = require("mongoose");
+const moment = require('moment'); // require moment
+
+
+
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
@@ -33,8 +37,8 @@ const UserSchema = new mongoose.Schema({
     },
 
     date: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: moment().format("MMMM Do YYYY, k:mm:ss"),
     },
 });
 const User = mongoose.model('users', UserSchema);
@@ -64,11 +68,6 @@ app.get("/leaderboard/:scenename", async (req, res) => {
     try {
       const users = await User.find({scene: sceneName});
       res.send(users);
-/*       return res.status(200).json({
-        success: true,
-        count: users.length,
-        data: users,
-      });  */
 
     } catch (err) {
       res.send(err);

@@ -51,8 +51,9 @@
 
 .navbarCharactersContainer{
     height: 100%;
-    flex-grow: 1;
     flex-shrink: 1;
+    display: flex;
+
 }
 
 .MuiStack-root{
@@ -117,27 +118,51 @@
     transition-duration: .3s;
 }
 
+
+
 /* Responsive dropdown button */
 
 .dropdownBtn{
  display: none;
+ font-size: 3vw;
+ color: red;
+}
+
+.nav-link{
+    font-family: Bungee Shade;
+}
+
+.dropdown-menu{
+  --bs-dropdown-min-width: none;
+}
+
+.dropdown-menu.show{
+    width: max-content;
+    height: fit-content;
+    background-color: lightcyan;
 }
 
 .dropdown-character{
     margin: 1vh;
     margin-left: 1vh;
     margin-right: 2vh;
+    font-size: 1.5vh;
+}
+
+.dropdown-character:hover{
+    font-size: 1.6vh !important;
+}
+
+.navbarCharacterDropdownAvatar{
+    height: 4vh !important;
+    min-height: 2.5rem;
+    width: auto !important;
 }
 
 .navbarAvatarContainer:hover > .navbarCharacterDropdownAvatar { 
     height: 6vh !important;
     width: auto;  
 }
-
-.navbarAvatarContainer:hover > .dropdown-character { 
-    width: auto;  
-}
-
 
 @media (max-width: 1285px) {
     .dropdownBtn{
@@ -147,6 +172,16 @@
     .navbarCharactersContainer{
         display: none;
     }
-       
+}
 
+@media (max-width: 700px) {
+    .dropdownBtn{
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .dropdownBtn{
+        font-size: 5vw;
+    }
 }

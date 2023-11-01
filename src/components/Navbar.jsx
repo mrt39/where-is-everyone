@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/Navbar.css'
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
@@ -10,12 +10,30 @@ import HeaderImg from "../assets/images/header.png"
 export default function Navbar({scene, targetCharacters, setTargetCharacters, time, setTime, isRunning, setIsRunning,setScene}) {
 
 
+  //state for displaying number of characters in the responsive dropdown button
+  const [remainingCharacterNumber, setRemainingCharacterNumber] = useState(5);
+
+
+    //update the remaining "unfound" character number everytime the targetCharacters state get updated
+    useEffect(() => {
+
+      if (scene){
+      const number = targetCharacters[scene].filter((character) => character.found === false).length;
+
+      setRemainingCharacterNumber(number)
+     }
+
+    }, [targetCharacters]);
+
+
   function handleLogoClick(){
     //stop and reset the timer
     setIsRunning(false)
     setTime(0)
     //reset the scene
     setScene()
+    //reset the remaining character number to 5
+    setRemainingCharacterNumber(5)
 
     /* turn all of the "found" key values to "unfound" on setTargetCharacters state */
     //copy the object
@@ -51,7 +69,7 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
       </div>
       <div className="nav-item dropdown dropdownBtn">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            {remainingCharacterNumber}
           </a>
           <ul className="dropdown-menu">
           {targetCharacters[scene].map((character) =>

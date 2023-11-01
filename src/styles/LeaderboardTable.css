@@ -1,0 +1,9 @@
+.MuiTableCell-root{
+    width: 25%;
+    font-family: Roboto Condensed !important;
+    font-size: 15.5px !important;
+}
+
+.tableTitleRow{
+    text-align: center;
+}

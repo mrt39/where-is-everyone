@@ -1,3 +1,4 @@
+import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import '../styles/Leaderboard.css'
 import LeaderboardTable from "./LeaderboardTable.jsx"
@@ -5,21 +6,15 @@ import LeaderboardTable from "./LeaderboardTable.jsx"
 
 const Leaderboard = () => {
 
+   {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
+    const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, ssetTime, isRunning, setIsRunning, selectedSceneOnLeaderboard,  setSelectedSceneOnLeaderboard] = useOutletContext();
+
     const [data, setData] = useState();
-    const [selectedScene, setSelectedScene] = useState();
+
 
     useEffect(() => {
       
-/*         const fetchData = async () => {
-        const response = await fetch('http://localhost:5000/leaderboard');
-        const json = await response.json();
-        setData(json)
-        console.log(json)
-      }
-      
-      fetchData();  */
-
-        fetch('http://localhost:5000/leaderboard/'+ selectedScene)
+        fetch('http://localhost:5000/leaderboard/'+ selectedSceneOnLeaderboard)
           .then((res) => res.json())
           .then((jsondata) => {
             setData(jsondata)
@@ -28,19 +23,23 @@ const Leaderboard = () => {
             console.log(err.message);
           }); 
 
-    }, [selectedScene])
+    }, [selectedSceneOnLeaderboard])
 
 
     return (
       <div className='leaderboardContainer'>
-        <a href="#" onClick={() => setSelectedScene("star-wars")}>Star Wars </a>
-        <br />
-        <a href="#" onClick={() =>  setSelectedScene("festival")}>Festival </a>
-        <br />
-        <a href="#" onClick={() =>  setSelectedScene("nozze-cana")}>Nozze de Cana </a>
+        <div className='leaderboardSceneNamesContainer'>
+          <a href="#" onClick={() => setSelectedSceneOnLeaderboard("star-wars")}>Star Wars </a>
+          <br />
+          <a href="#" onClick={() =>  setSelectedSceneOnLeaderboard("nozze-cana")}>Nozze de Cana </a>
+          <br />
+          <a href="#" onClick={() =>  setSelectedSceneOnLeaderboard("festival")}>Festival </a>
+        </div>
         <div>
           <LeaderboardTable
-          data={data}/>
+          data={data}
+          selectedSceneOnLeaderboard={selectedSceneOnLeaderboard}
+          />
         </div>
         <div>
           {data? 

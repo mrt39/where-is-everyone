@@ -1,6 +1,25 @@
 .stopwatch-time {
     text-align: center;
     color: black;
-    font-size: 2rem;
+    font-size: 2vw;
     margin: 0;
+}
+
+
+@media (max-width: 1285px) {
+    .stopwatch-time {
+      font-size: 3vw;
+    }
+}
+
+@media (max-width: 700px) {
+    .stopwatch-time {
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .stopwatch-time {
+        font-size: 5vw;
+    }
 }
