@@ -148,8 +148,17 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
-          <TableRow className='tableTitleRow'>
-            <TableCell align="center" colspan="4" ><strong>{selectedSceneOnLeaderboard}</strong></TableCell>
+          <TableRow >
+            <TableCell className='tableTitleRow' align="center" colspan="4" ><strong>{
+                 (() => {
+                  if (selectedSceneOnLeaderboard ==="star-wars")
+                     return <span>Star Wars Leaderboard</span>
+                  else if (selectedSceneOnLeaderboard ==="festival")
+                     return <span>Festival Leaderboard</span>
+                  else (selectedSceneOnLeaderboard ==="nozze-cana")
+                     return <span>Nozze de Cana Leaderboard</span>
+              })()
+            }</strong></TableCell>
           </TableRow>
           <TableRow>
             <TableCell align="center"><strong>Ranking</strong></TableCell>
@@ -160,7 +169,9 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
         </TableHead>
         <TableBody>
         { data? 
-          data
+        //sort data according to time, in ascending order
+          data.sort((player1, player2) => (player1.time > player2.time) ? 1 : (player1.time < player2.time) ? -1 : 0)
+          //divide to pages
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((player, index) => (
             <TableRow

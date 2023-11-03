@@ -1,7 +1,5 @@
 .choose-scene-container{
     margin-top: 10vh;
-    display: grid;
-    place-items: center;
 }
 
 .frame-container{

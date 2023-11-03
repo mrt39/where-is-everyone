@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import '../styles/Leaderboard.css'
-import LeaderboardTable from "./LeaderboardTable.jsx"
+import LeaderboardTable from "../components/LeaderboardTable.jsx"
 
 
 const Leaderboard = () => {
@@ -40,17 +40,6 @@ const Leaderboard = () => {
           data={data}
           selectedSceneOnLeaderboard={selectedSceneOnLeaderboard}
           />
-        </div>
-        <div>
-          {data? 
-              <ul>
-              {data.map((player) =>
-                <li key={player.name}>
-                  {player.name}
-                </li>
-              )}
-            </ul>
-        :""}  
         </div>
       </div>
     );

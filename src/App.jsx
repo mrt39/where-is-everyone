@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Outlet } from "react-router-dom";
 import './styles/App.css'
 import Navbar from "./components/Navbar.jsx"
- 
+import Footer from './components/Footer.jsx';
 
 
 
@@ -45,7 +45,7 @@ const App = () => {
 }
 
   return (
-    <div>
+    <div className='appContainer'>
       <Navbar
       scene = {scene}
       setScene={setScene}
@@ -58,6 +58,9 @@ const App = () => {
       />
       {/* "context" is how you pass props to Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
       <Outlet  context={[scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, setTime, isRunning, setIsRunning, selectedSceneOnLeaderboard, setSelectedSceneOnLeaderboard]} /> 
+      <Footer
+      scene = {scene}
+      />
     </div>
   );
 };

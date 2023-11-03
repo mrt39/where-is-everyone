@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import '../styles/Navbar.css'
+
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -47,6 +48,7 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
   }
 
   return (
+    <>
     <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
       <div className="navbar-brand">
          <Link className='navbarHeaderImg' onClick={() => handleLogoClick()}
@@ -97,8 +99,8 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
         </div>
       </Link>
       }
-
-    
   </nav>
+
+  </>
   );
 }

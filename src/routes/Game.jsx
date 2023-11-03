@@ -1,13 +1,15 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import '../styles/Game.css';
 import ImageMarker from 'react-image-marker';
-import ClickMenu from './Click-Menu';
-import SnackBar from "./SnackBar";
-import GameWonModal from "./Modal";
+import ClickMenu from '../components/Click-Menu';
+import SnackBar from "../components/SnackBar";
+import GameWonModal from "../components/Modal";
 
 
 export default function Game() {
+
+   const navigate = useNavigate(); 
 
   {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
   const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, ssetTime, isRunning, setIsRunning, selectedSceneOnLeaderboard,  setSelectedSceneOnLeaderboard] = useOutletContext();
@@ -26,7 +28,13 @@ export default function Game() {
 
   //start timer when rendered first time
   useEffect(() => {
-    setIsRunning(true);
+    //if scene is selected (if the user chooses a scene from the homepage) start the timer.
+    if(scene){
+      setIsRunning(true);
+    } else {
+    //if it isn't selected and user has accessed /game route via refreshing or manually typing, redirect to homepage.
+      navigate("/"); 
+    }
   }, []);
 
 
@@ -140,7 +148,7 @@ export default function Game() {
         setScene={setScene}
         setSelectedSceneOnLeaderboard= {setSelectedSceneOnLeaderboard}
         />
-        
     </div>
+    
   );
 }

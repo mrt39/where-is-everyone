@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import '../styles/Click-Menu.css';
 import Avatar from "@mui/material/Avatar";
@@ -9,6 +10,18 @@ import MenuItem from "@mui/material/MenuItem";
 
 export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, handleModalOpen, setIsRunning, clickMenuDisplay, open, scene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates}) {
 
+  const navigate = useNavigate();
+/* 
+  useEffect(() => {
+    //check if scene has been selected. if not, go to homepage
+    if (scene){
+    setIsRunning(true);
+    }
+    else{
+    return navigate("/leaderboard"); 
+    }
+  }, []); */
+  
   function handleMenuClick(name) {
     //close the menu
     setclickMenuDisplay(null);
@@ -26,21 +39,8 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
     console.log(currentScreenSizeX)
     console.log(currentScreenSizeY)
     
-    
-/*     let currentScreenSizeX= document.documentElement.scrollWidth;
-    let currentScreenSizeY= document.documentElement.scrollHeight; */
-
-    /* console.log(currentScreenSizeX)
-    console.log(currentScreenSizeY) */
 
     if (typeof name == "string"){
-
-/*     console.log("Clicked X coordinates for this character should be between: " + targetCharactersWithCoordinates[scene][name]["X"][0] * currentScreenSizeX + " and " + targetCharactersWithCoordinates[scene][name]["X"][1] * currentScreenSizeX)
-
-    console.log("Clicked Y coordinates for this character should be between: " + targetCharactersWithCoordinates[scene][name]["y"][0] * currentScreenSizeY + " and " + targetCharactersWithCoordinates[scene][name]["y"][1] * currentScreenSizeY)
-
-    console.log("Current screen size X = " + currentScreenSizeX)
-    console.log("Current screen size Y = " + currentScreenSizeY) */
 
     if (between(clickCoordinates[0], targetCharactersWithCoordinates[scene][name]["X"][0] * currentScreenSizeX, targetCharactersWithCoordinates[scene][name]["X"][1] * currentScreenSizeX) && between (clickCoordinates[1], targetCharactersWithCoordinates[scene][name]["y"][0] * currentScreenSizeY, targetCharactersWithCoordinates[scene][name]["y"][1] * currentScreenSizeY)) {
         console.log("Found " + name)
@@ -117,13 +117,20 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         anchorPosition={{ top: clickCoordinatesClientScreen[1]+40, left: clickCoordinatesClientScreen[0]-53 }}
         transformOrigin={{ horizontal: "center", vertical: "top" }}
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
-      >
-      {targetCharacters[scene].map((character) =>
-        <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
-          <Avatar alt={character.name} src={`./src/assets/images/${character.name}.png`} /> {character.name}
-        </MenuItem>
-      )}
+      > 
+      {
+        (() => {
+          /* if scene isn't selected, don't render */
+        if (scene)
+            return ( targetCharacters[scene].map((character) =>
+              <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
+                <Avatar alt={character.name} src={`./src/assets/images/${character.name}.png`} /> {character.name}
+              </MenuItem>
+            ))
+        })()
+      } 
 
+      
       </Menu>
     </React.Fragment>
   );

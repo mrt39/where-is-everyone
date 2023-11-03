@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
 import { useOutletContext } from "react-router-dom";
 import '../styles/Choose-Scene.css';
-import Frame from './Frame';
+import Frame from '../components/Frame';
 
 
 

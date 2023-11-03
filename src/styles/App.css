@@ -4,6 +4,7 @@
   margin: 0 auto;
   text-align: center;
   font-family: Roboto Condensed;
+  width: 100%;
 }
 
 body {
@@ -15,3 +16,7 @@ h1{
   font-size: 1.875rem;
   margin: 2rem;
 }
+
+
+
+

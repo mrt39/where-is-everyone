@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     time: {
-        type: String,
+        type: Number,
         required: true,
     },
 
@@ -38,7 +38,8 @@ const UserSchema = new mongoose.Schema({
 
     date: {
         type: String,
-        default: moment().format("MMMM Do YYYY, k:mm:ss"),
+        required: true,
+        /* default:  new Date()/* new moment().format("MMMM Do YYYY, k:mm:ss"), */ 
     },
 });
 const User = mongoose.model('users', UserSchema);
@@ -82,7 +83,8 @@ app.post("/register", async (req, res) => {
         const newuser = new User({
             name: req.body.input,
             time: req.body.time,
-            scene: req.body.scene
+            scene: req.body.scene,
+            date: req.body.date
         });
         newuser.save();
  

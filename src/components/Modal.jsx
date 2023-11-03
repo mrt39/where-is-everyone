@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { redirect, useNavigate  } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
+import moment from 'moment';
 import '../styles/Modal.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,6 +10,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+
 
 
 export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, time, scene, setScene, setSelectedSceneOnLeaderboard}) {
@@ -36,11 +37,13 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
 
     useEffect(() => {
         async function postData() {
+
+            let date = moment().format("MMMM Do YYYY, k:mm:ss")
             
             let result = await fetch(
             'http://localhost:5000/register', {
                 method: "post",
-                body: JSON.stringify({ input, time, scene }),
+                body: JSON.stringify({ input, time, scene, date }),
                 headers: {
                     'Content-Type': 'application/json'
                 }

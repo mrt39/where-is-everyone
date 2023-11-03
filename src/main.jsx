@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.jsx';
-import Leaderboard from "./components/Leaderboard.jsx";
-import ChooseScene from './components/Choose-Scene.jsx';
-import Game from './components/Game.jsx';
+import Leaderboard from "./routes/Leaderboard.jsx";
+import ChooseScene from './routes/Choose-Scene.jsx';
+import Game from './routes/Game.jsx';
 
 
 const router = createBrowserRouter([
@@ -19,10 +19,6 @@ const router = createBrowserRouter([
     ],
 
   },
-/*   {
-    path: "/profile",
-    element: <Profile />,
-  }, */
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
