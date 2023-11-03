@@ -1,8 +1,7 @@
+require('dotenv').config()
+
 // Import the mongoose module
 const mongoose = require("mongoose");
-const moment = require('moment'); // require moment
-
-
 
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
@@ -11,7 +10,8 @@ const moment = require('moment'); // require moment
 mongoose.set("strictQuery", false);
 
 // Define the database URL to connect to.
-const mongoDB = "mongodb://127.0.0.1:27017/scoreboard";
+/* const mongoDB = "mongodb://127.0.0.1:27017/scoreboard"; */
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 // Wait for database to connect, logging an error if there is a problem
 main().catch((err) => console.log(err));
