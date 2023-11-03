@@ -5,6 +5,7 @@ import ImageMarker from 'react-image-marker';
 import ClickMenu from '../components/Click-Menu';
 import SnackBar from "../components/SnackBar";
 import GameWonModal from "../components/Modal";
+import GameStartDialog from "../components/Dialog";
 
 
 export default function Game() {
@@ -28,13 +29,10 @@ export default function Game() {
 
   //start timer when rendered first time
   useEffect(() => {
-    //if scene is selected (if the user chooses a scene from the homepage) start the timer.
-    if(scene){
-      setIsRunning(true);
-    } else {
-    //if it isn't selected and user has accessed /game route via refreshing or manually typing, redirect to homepage.
+    //if scene is selected (if theuser has accessed /game route via refreshing or manually typing to address bar) redirect to homepage.
+    if(!scene){
       navigate("/"); 
-    }
+    } 
   }, []);
 
 
@@ -104,8 +102,11 @@ export default function Game() {
 
   return (
     <div className='game-container'>
+        <GameStartDialog
+        setIsRunning = {setIsRunning}
+        />
         <div
-        onClick={() =>  {/* clickImage(event); */ handleImageClick(event); getClickCoordinates(event); setSnackBarOpen(false)}}>
+        onClick={() =>  {handleImageClick(event); getClickCoordinates(event); setSnackBarOpen(false)}}>
             <ImageMarker
             /* using imageMarket to get a marker on image onclick 
             https://www.npmjs.com/package/react-image-marker */

@@ -24,7 +24,7 @@ grid-row-end: 4;
 text-align: center;
 width: 100%;
 background-color: #add8e6 ;
-z-index: 9999;
+z-index: 1;
 height: auto;
 color: white;
 }

@@ -1,0 +1,24 @@
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    background-color: #e3f2fd !important;
+    font-family: Roboto Condensed !important;
+}
+
+
+.MuiTypography-root{
+    font-family: Roboto Condensed !important;
+}
+
+#alert-dialog-title{
+    text-align: center;
+    font-weight: 600;
+}
+
+#alert-dialog-description{
+    text-align: center;
+}
+
+.dialogButtonContainer{
+    justify-content: center !important;
+}
+
+

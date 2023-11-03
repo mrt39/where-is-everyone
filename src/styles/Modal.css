@@ -5,3 +5,7 @@
 .modalTimeDisplay{
     margin-top: 1rem;
 }
+
+.MuiTypography-root{
+    color: black;
+}
