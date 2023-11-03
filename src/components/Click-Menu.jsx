@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import {useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import '../styles/Click-Menu.css';
 import Avatar from "@mui/material/Avatar";
@@ -10,17 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clickCoordinates, clickCoordinatesClientScreen, setclickMenuDisplay, handleModalOpen, setIsRunning, clickMenuDisplay, open, scene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates}) {
 
-  const navigate = useNavigate();
-/* 
-  useEffect(() => {
-    //check if scene has been selected. if not, go to homepage
-    if (scene){
-    setIsRunning(true);
-    }
-    else{
-    return navigate("/leaderboard"); 
-    }
-  }, []); */
+
   
   function handleMenuClick(name) {
     //close the menu
@@ -77,6 +66,13 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
     return x >= min && x <= max;
   }
 
+  //convert string into kebab case
+  function kebabCase (string) {
+    return string.replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+  }
+
   return (
     <React.Fragment>
       <Menu
@@ -124,7 +120,7 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         if (scene)
             return ( targetCharacters[scene].map((character) =>
               <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
-                <Avatar alt={character.name} src={`./src/assets/images/${character.name}.png`} /> {character.name}
+                <Avatar alt={character.name} src={`./src/assets/images/${kebabCase(character.name)}.png`} /> {character.name}
               </MenuItem>
             ))
         })()

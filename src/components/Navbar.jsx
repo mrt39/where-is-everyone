@@ -47,6 +47,13 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
     setTargetCharacters(copiedobject)
   }
 
+    //convert string into kebab case
+    function kebabCase (string) {
+      return string.replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/[\s_]+/g, '-')
+      .toLowerCase();
+    }
+
   return (
     <>
     <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -62,7 +69,7 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
           <div key={character.name} className={`navbarAvatarContainer ${character.found? "characterFound" : null}`}>
               <Avatar alt={character.name} 
               className='navbarCharacterAvatar'
-              src={`./src/assets/images/${character.name}.png`} 
+              src={`./src/assets/images/${kebabCase(character.name)}.png`} 
               sx={{ width: 45, height: 45 }} 
               /> {character.name}
           </div>
@@ -78,7 +85,7 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
           <li key={character.name} className={`dropdown-character navbarAvatarContainer ${character.found? "characterFound" : null}`}>
               <Avatar alt={character.name} 
               className='navbarCharacterDropdownAvatar'
-              src={`./src/assets/images/${character.name}.png`} 
+              src={`./src/assets/images/${kebabCase(character.name)}.png`} 
               sx={{ width: 45, height: 45 }} 
               /> {character.name}
           </li>
