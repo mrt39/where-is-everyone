@@ -123,7 +123,7 @@
 
 .dropdownBtn{
  display: none;
- font-size: 3vw;
+ font-size: 3.5vw;
  color: red;
 }
 
@@ -175,12 +175,12 @@
 
 @media (max-width: 700px) {
     .dropdownBtn{
-        font-size: 4vw;
+        font-size: 5vw;
     }
 }
 
 @media (max-width: 400px) {
     .dropdownBtn{
-        font-size: 5vw;
+        font-size: 7vw;
     }
 }

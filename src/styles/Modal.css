@@ -9,3 +9,7 @@
 .MuiTypography-root{
     color: black;
 }
+
+.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
+    font-size: 1.1rem !important;
+}

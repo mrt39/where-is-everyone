@@ -11,14 +11,20 @@
 #alert-dialog-title{
     text-align: center;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 #alert-dialog-description{
     text-align: center;
+    font-size: 1.1rem;
 }
 
 .dialogButtonContainer{
     justify-content: center !important;
 }
 
+
+.MuiButtonBase-root{
+    font-size: 0.9rem !important;
+}
 

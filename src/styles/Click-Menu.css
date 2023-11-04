@@ -1,3 +1,21 @@
 .clickMenuCharacterFound{
     display: none !important;
 }
+
+
+.clickMenuCharacterAvatarName{
+    font-size: 1.3vh !important;
+    font-family: Roboto Condensed;
+}
+
+.css-1eaqvnp-MuiPaper-root-MuiPopover-paper-MuiMenu-paper .MuiAvatar-root{
+    height: 3.5vh;
+    width: 3.5vh;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root{
+    padding-top: 0.5vh !important;
+    padding-bottom: 0.5vh !important;
+    min-height: 35px;
+}
+

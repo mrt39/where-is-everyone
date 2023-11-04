@@ -120,7 +120,7 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         if (scene)
             return ( targetCharacters[scene].map((character) =>
               <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
-                <Avatar alt={character.name} src={`./src/assets/images/${kebabCase(character.name)}.png`} /> {character.name}
+                <Avatar alt={character.name} src={`./src/assets/images/${kebabCase(character.name)}.png`} /> <p className="clickMenuCharacterAvatarName" >{character.name}</p>
               </MenuItem>
             ))
         })()
