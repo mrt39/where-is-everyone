@@ -176,7 +176,7 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((player, index) => (
             <TableRow
-              key={player.name}
+              key={player.date}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row" align="center"> <span>{index+1}</span></TableCell>
