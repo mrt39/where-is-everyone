@@ -1,14 +1,5 @@
 require('dotenv').config()
 
-//add CORS
-const cors = require('cors');
-// Allow all origins
-app.use(cors());
-/* // Allow specific origin(s)
-app.use(cors({
-  origin: 'https://yourdeployedsite.com'
-})); */
-
 // Import the mongoose module
 const mongoose = require("mongoose");
 
