@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import {useState, useEffect} from "react";
 import * as React from 'react';
 import '../styles/Click-Menu.css';
 import Avatar from "@mui/material/Avatar";

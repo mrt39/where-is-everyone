@@ -1,13 +1,11 @@
-import * as React from 'react';
+/* eslint-disable react/prop-types */
 import '../styles/Footer.css'
-import { Link } from "react-router-dom";
 
 
 export default function Footer({scene}) {
 
 return (
     <footer className= {scene?"footer" :"footer homePage"}>
-      {/* <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div> */}
          <div className="footer-firstline">
             <a href="https://github.com/mrt39">
                 <div id="svgContainer">

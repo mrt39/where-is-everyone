@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */
 {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
 import { useOutletContext } from "react-router-dom";
 import '../styles/Choose-Scene.css';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { useNavigate  } from "react-router-dom";
 import moment from 'moment';

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import '../styles/Leaderboard.css'
