@@ -71,9 +71,6 @@ export default function Game() {
     var xCoordinate = event.offsetX;
     var yCoordinate = event.offsetY;
 
-    console.log("Clicked X coordinate: " + xCoordinate)
-    console.log("Clicked Y coordinate: " + yCoordinate)
-
      setclickCoordinates([xCoordinate, yCoordinate])  
 
 

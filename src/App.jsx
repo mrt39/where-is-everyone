@@ -8,7 +8,7 @@ import {targetCharactersWithCoordinates} from './components/CharacterData.js';
 
 const App = () => {
 
-  const [scene, setScene] = useState();
+  const [scene, setScene] = useState("");
   const [selectedSceneOnLeaderboard, setSelectedSceneOnLeaderboard] = useState("star-wars");
 
   const [targetCharacters, setTargetCharacters] = useState({

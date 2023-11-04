@@ -23,11 +23,7 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
     //image.width-image.height: https://stackoverflow.com/questions/623172/how-to-get-the-image-size-height-width-using-javascript
     
     let currentScreenSizeX= document.getElementsByClassName('gameImg')[0].width;
-    let currentScreenSizeY= document.getElementsByClassName('gameImg')[0].height;
-
-    console.log(currentScreenSizeX)
-    console.log(currentScreenSizeY)
-    
+    let currentScreenSizeY= document.getElementsByClassName('gameImg')[0].height;  
 
     if (typeof name == "string"){
 

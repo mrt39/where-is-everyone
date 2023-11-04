@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import { useTheme } from '@mui/material/styles';
@@ -149,7 +151,7 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow >
-            <TableCell className='tableTitleRow' align="center" colspan="4" ><strong>{
+            <TableCell className='tableTitleRow' align="center" colSpan="4" ><strong>{
                  (() => {
                   if (selectedSceneOnLeaderboard ==="star-wars")
                      return <span>Star Wars Leaderboard</span>
@@ -161,10 +163,10 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
             }</strong></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="center"><strong>Ranking</strong></TableCell>
-            <TableCell align="center"><strong>Name</strong></TableCell>
-            <TableCell align="center"><strong>Time</strong></TableCell>
-            <TableCell align="center"><strong>Date</strong></TableCell>
+            <TableCell align="center"><strong><span>Ranking</span></strong></TableCell>
+            <TableCell align="center"><strong><span>Name</span></strong></TableCell>
+            <TableCell align="center"><strong><span>Time</span></strong></TableCell>
+            <TableCell align="center"><strong><span>Date</span></strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -178,35 +180,36 @@ export default function LeaderboardTable({data, selectedSceneOnLeaderboard}) {
               key={player.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row" align="center">{index+1}</TableCell>
-              <TableCell align="center">{player.name}</TableCell>
-              <TableCell align="center">{manageTime(player.time)}</TableCell>
-              <TableCell align="center">{player.date}</TableCell>
+              <TableCell component="th" scope="row" align="center"> <span>{index+1}</span></TableCell>
+              <TableCell align="center"><span>{player.name}</span></TableCell>
+              <TableCell align="center"><span>{manageTime(player.time)}</span></TableCell>
+              <TableCell align="center"><span>{player.date}</span></TableCell>
             </TableRow>
           ))
-        :""}
+        :null}
         </TableBody>
         <TableFooter>
           <TableRow>
             {data? 
-            data.length > 25 &&
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: {
-                    'aria-label': 'rows per page',
-                  },
-                  native: true,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            :""}
+              data.length>25?(
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                  colSpan={3}
+                  count={rows.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: {
+                      'aria-label': 'rows per page',
+                    },
+                    native: true,
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+                ):null
+            :null}
           </TableRow>
         </TableFooter>
       </Table>
