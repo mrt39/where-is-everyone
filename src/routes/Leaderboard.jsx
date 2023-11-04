@@ -15,7 +15,7 @@ const Leaderboard = () => {
 
     useEffect(() => {
       
-        fetch('http://localhost:5000/leaderboard/'+ selectedSceneOnLeaderboard)
+        fetch('https://where-is-everyone.vercel.app/leaderboard/'+ selectedSceneOnLeaderboard)
           .then((res) => res.json())
           .then((jsondata) => {
             setData(jsondata)

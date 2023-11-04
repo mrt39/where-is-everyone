@@ -41,7 +41,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
             let date = moment().format("MMMM Do YYYY, k:mm:ss")
             
             let result = await fetch(
-            'http://localhost:5000/register', {
+            'https://where-is-everyone.vercel.app/register', {
                 method: "post",
                 body: JSON.stringify({ input, time, scene, date }),
                 headers: {
