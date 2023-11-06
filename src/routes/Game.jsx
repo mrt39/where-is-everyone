@@ -108,7 +108,9 @@ export default function Game() {
             <ImageMarker
             /* using imageMarket to get a marker on image onclick 
             https://www.npmjs.com/package/react-image-marker */
-            src={`./src/assets/images/${scene}.jpg`}
+            //images will be rendered from the public directory 
+            //https://vitejs.dev/guide/assets.html#the-public-directory
+            src={`/images/${scene}.jpg`}
             markers={markers}
             onAddMarker={(marker) => setMarkers([marker])}
             markerComponent={CustomMarker}

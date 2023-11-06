@@ -69,7 +69,9 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
           <div key={character.name} className={`navbarAvatarContainer ${character.found? "characterFound" : null}`}>
               <Avatar alt={character.name} 
               className='navbarCharacterAvatar'
-              src={`./src/assets/images/${kebabCase(character.name)}.png`} 
+              //images will be rendered from the public directory 
+              //https://vitejs.dev/guide/assets.html#the-public-directory
+              src={`/images/${kebabCase(character.name)}.png`} 
               sx={{ width: 45, height: 45 }} 
               /> {character.name}
           </div>
@@ -85,7 +87,7 @@ export default function Navbar({scene, targetCharacters, setTargetCharacters, ti
           <li key={character.name} className={`dropdown-character navbarAvatarContainer ${character.found? "characterFound" : null}`}>
               <Avatar alt={character.name} 
               className='navbarCharacterDropdownAvatar'
-              src={`./src/assets/images/${kebabCase(character.name)}.png`} 
+              src={`/images/${kebabCase(character.name)}.png`} 
               sx={{ width: 45, height: 45 }} 
               /> {character.name}
           </li>

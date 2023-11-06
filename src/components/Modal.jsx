@@ -10,6 +10,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 
 
@@ -45,24 +48,25 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
                 method: "post",
                 body: JSON.stringify({ input, time, scene, date }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
                 }
             })
             result = await result.json();
             console.warn(result);
             if (result) {
-                console.log("Data saved succesfully");
+                console.log("Data saved successfully");
                 setInput("");
+                setSelectedSceneOnLeaderboard(scene);
+                setScene();
+                navigate("/leaderboard"); 
+                setSubmitted(false);
             }   
         }
         
         //after submit, redirect user to the leaderboard page
         if (submitted ===true){
         postData();
-        setSelectedSceneOnLeaderboard(scene);
-        setScene();
-        navigate("/leaderboard"); 
-        setSubmitted(false);
         }
     }, [submitted]);
 
@@ -111,14 +115,21 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
             disabled
             id="outlined-disabled"
             label="Time"
-            defaultValue="TimeValue"
             margin="dense"
             value = {manageTime()}
             />
             </DialogContent>
             <DialogActions>
-            <Button onClick={handleClose}>Don't Submit</Button>
-            <Button onClick={handleSubmit}>Submit</Button>
+            {submitted?     
+            <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+            </Box>
+            :
+            <div>
+                <Button onClick={handleClose}>Don't Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
+            </div>
+            }
             </DialogActions>
         </Dialog>
         </div>

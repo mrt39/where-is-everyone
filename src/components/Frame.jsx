@@ -4,6 +4,7 @@ import '../styles/Frame.css';
 
 
 
+
 export default function Frame({setScene, clickedScene, displayName}) {
 
 
@@ -14,8 +15,10 @@ export default function Frame({setScene, clickedScene, displayName}) {
     <article className="card">
       <img
         className="card__background"
-        src ={`./src/assets/images/frame-${clickedScene}.png`}
-        alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+        //images will be imported from the public directory 
+        //https://vitejs.dev/guide/assets.html#the-public-directory
+        src ={`/images/frame-${clickedScene}.png`}
+        alt={clickedScene}
 
       />
       <div className="card__content | flow">

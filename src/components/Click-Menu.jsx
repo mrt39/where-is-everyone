@@ -27,7 +27,6 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
     if (typeof name == "string"){
 
     if (between(clickCoordinates[0], targetCharactersWithCoordinates[scene][name]["X"][0] * currentScreenSizeX, targetCharactersWithCoordinates[scene][name]["X"][1] * currentScreenSizeX) && between (clickCoordinates[1], targetCharactersWithCoordinates[scene][name]["y"][0] * currentScreenSizeY, targetCharactersWithCoordinates[scene][name]["y"][1] * currentScreenSizeY)) {
-        console.log("Found " + name)
         manageSnackBarSettings(true, name)
         setSnackBarOpen(true);
         /* turn the "found" property of the targetCharacters state to "true" */
@@ -39,7 +38,6 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         copiedobject[scene][index].found = true
         //change state
         setTargetCharacters(copiedobject)
-        console.log(targetCharacters)
         //if all characters have been found, open the score entry modal
         if(targetCharacters[scene].every((character) => character.found === true)){
           handleModalOpen()
@@ -115,7 +113,11 @@ export default function ClickMenu({setSnackBarOpen, manageSnackBarSettings, clic
         if (scene)
             return ( targetCharacters[scene].map((character) =>
               <MenuItem className={character.found? "clickMenuCharacterFound" : null} key={character.name} onClick={() => handleMenuClick(character.name)}>
-                <Avatar alt={character.name} src={`./src/assets/images/${kebabCase(character.name)}.png`} /> <p className="clickMenuCharacterAvatarName" >{character.name}</p>
+                <Avatar alt={character.name} 
+                //images will be rendered from the public directory 
+                //https://vitejs.dev/guide/assets.html#the-public-directory
+                src={`/images/${kebabCase(character.name)}.png`} /> 
+                <p className="clickMenuCharacterAvatarName" >{character.name}</p>
               </MenuItem>
             ))
         })()

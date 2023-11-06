@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import * as React from 'react';
-import '../styles/Snackbar.css';
+import '../styles/SnackBar.css';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 

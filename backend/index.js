@@ -86,7 +86,8 @@ app.post("/register", async (req, res) => {
             scene: req.body.scene,
             date: req.body.date
         });
-        newuser.save();
+        const result = newuser.save();
+        res.send(result)
  
     } catch (e) {
         res.send("Something Went Wrong");

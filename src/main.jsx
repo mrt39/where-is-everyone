@@ -5,11 +5,14 @@ import App from './App.jsx';
 import Leaderboard from "./routes/Leaderboard.jsx";
 import ChooseScene from './routes/Choose-Scene.jsx';
 import Game from './routes/Game.jsx';
+import ErrorPage from "./components/Error-Page.jsx";
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     element: <App />,
     children: [
       { index: true, element: <ChooseScene/> },
