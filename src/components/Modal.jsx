@@ -12,6 +12,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { clean } from 'profanity-cleaner';
+
 
 
 
@@ -21,7 +23,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
 
     const navigate = useNavigate();
 
-    const [input, setInput] = useState("")
+    const [nameInput, setNameInput] = useState("")
     const [submitted, setSubmitted] = useState(false)
 
     const handleClose = () => {
@@ -30,7 +32,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
 
 
     function handleInputChange(event){
-        setInput(event.target.value)
+        setNameInput(event.target.value)
     }
 
     function handleSubmit(event){
@@ -42,6 +44,10 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
         async function postData() {
 
             let date = moment().format("MMMM Do YYYY, k:mm:ss")
+            
+            //on submit, clean the word with the profanity cleaner package
+            //https://www.npmjs.com/package/profanity-cleaner
+            let input = await clean(nameInput, { keepFirstAndLastChar: true })
             
             let result = await fetch(
             'https://where-is-everyone.vercel.app/register', {
@@ -56,7 +62,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
             console.warn(result);
             if (result) {
                 console.log("Data saved successfully");
-                setInput("");
+                setNameInput("");
                 setSelectedSceneOnLeaderboard(scene);
                 setScene();
                 navigate("/leaderboard"); 
@@ -107,7 +113,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
                 label="Name"
                 fullWidth
                 variant="standard"
-                value = {input}
+                value = {nameInput}
                 onChange={handleInputChange}
             />
             <TextField
