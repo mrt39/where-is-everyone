@@ -49,8 +49,7 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
             //https://www.npmjs.com/package/profanity-cleaner
             let input = await clean(nameInput, { keepFirstAndLastChar: true })
             
-            let result = await fetch(
-            'https://where-is-everyone.vercel.app/register', {
+            await fetch(import.meta.env.VITE_BACKEND_URL+"/register", {
                 method: "post",
                 body: JSON.stringify({ input, time, scene, date }),
                 headers: {
@@ -58,16 +57,21 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
                     "Access-Control-Allow-Origin": "*",
                 }
             })
-            result = await result.json();
-            console.warn(result);
-            if (result) {
-                console.log("Data saved successfully");
-                setNameInput("");
-                setSelectedSceneOnLeaderboard(scene);
-                setScene();
-                navigate("/leaderboard"); 
-                setSubmitted(false);
-            }   
+            .then(async result => {
+                if (result.ok){
+                    console.log("Submitted successfully!");
+                    setNameInput("");
+                    setSelectedSceneOnLeaderboard(scene);
+                    setScene();
+                    navigate("/leaderboard"); 
+                    setSubmitted(false);
+                }else{
+                    throw new Error(result)
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }); 
         }
         
         //after submit, redirect user to the leaderboard page
@@ -76,21 +80,13 @@ export default function GameWonModal({gameWonModalOpen, setgameWonModalOpen, tim
         }
     }, [submitted]);
 
-
-    
-
-
     function manageTime(){
-
         // Hours calculation
         const hours = Math.floor(time / 360000);
-
         // Minutes calculation
         const minutes = Math.floor((time % 360000) / 6000);
-
         // Seconds calculation
         const seconds = Math.floor((time % 6000) / 100);
-    
         // Milliseconds calculation
         const milliseconds = time % 100;
 

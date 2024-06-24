@@ -13,7 +13,7 @@ export default function Game() {
 
    const navigate = useNavigate(); 
 
-  {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
+  {/* Get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
   const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, ssetTime, isRunning, setIsRunning, selectedSceneOnLeaderboard,  setSelectedSceneOnLeaderboard] = useOutletContext();
 
   const [markers, setMarkers] = useState([]);

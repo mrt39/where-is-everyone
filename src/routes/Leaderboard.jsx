@@ -7,7 +7,7 @@ import LeaderboardTable from "../components/LeaderboardTable.jsx"
 
 const Leaderboard = () => {
 
-   {/* "useOutletContext" is how you get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
+   {/* Get props from Outlet: https://reactrouter.com/en/main/hooks/use-outlet-context */}
     const [scene, setScene, targetCharacters, setTargetCharacters, targetCharactersWithCoordinates, time, ssetTime, isRunning, setIsRunning, selectedSceneOnLeaderboard,  setSelectedSceneOnLeaderboard] = useOutletContext();
 
     const [data, setData] = useState();
@@ -15,7 +15,7 @@ const Leaderboard = () => {
 
     useEffect(() => {
       
-        fetch('https://where-is-everyone.vercel.app/leaderboard/'+ selectedSceneOnLeaderboard)
+        fetch(import.meta.env.VITE_BACKEND_URL+"/leaderboard/"+ selectedSceneOnLeaderboard)
           .then((res) => res.json())
           .then((jsondata) => {
             setData(jsondata)

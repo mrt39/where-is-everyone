@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 // Define the database URL to connect to.
-/* const mongoDB = "mongodb://127.0.0.1:27017/scoreboard"; */
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 // Wait for database to connect, logging an error if there is a problem
@@ -20,7 +19,7 @@ async function main() {
 }
 
  
-// Schema for users of app
+// Schema for users
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -54,7 +53,7 @@ app.use(express.json());
 app.use(cors());
 
 
-
+/* ------------------ROUTES------------------ */
 
 app.get("/", (req, res) => {
  

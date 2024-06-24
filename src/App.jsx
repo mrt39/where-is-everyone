@@ -17,7 +17,7 @@ const App = () => {
     "nozze-cana": [{name: "The Bride", found: false}, {name: "Paolo Veronese", found: false}, {name: "The Butcher", found: false}, {name: "Hourglass (Vanity)", found: false}, {name: "Suleiman the Magnificent", found: false}],
   });
   // state to store time from stopwatch
-    const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0);
   // state to check whether stopwatch is running
   const [isRunning, setIsRunning] = useState(false);
 
