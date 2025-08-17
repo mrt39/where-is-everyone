@@ -1,4 +1,4 @@
-# Where Is Everyone?
+# Where Is Everyone? - The Pixel Hunt Game
 
 https://github.com/mrt39/where-is-everyone/assets/90144973/1c1bea7d-cebe-4910-8aaa-3c7cffd735af
 
@@ -7,11 +7,12 @@ https://github.com/mrt39/where-is-everyone/assets/90144973/1c1bea7d-cebe-4910-8a
 [https://where-is-everyone-tcpp.vercel.app/](https://where-is-everyone-tcpp.vercel.app/)
 
 <h2>📓 Description</h2>
-Where is Everyone? is a pixel-hunt game inspired by <b>"Where's Waldo".</b> <br>
-Player chooses one of three illustrated scenes and try to locate five hidden characters as quickly as possible. <br>
-When the player finds a character, they click on its position and select the correct character from the appeared menu. If the clicked coordinates match the character's position, that character is marked as found. <br>
-After finding all of the characters, player can submit their time to a global leaderboard backed by small Express + MongoDB API.
-
+<ul>
+  <li>Where is Everyone? is a pixel-hunt game inspired by <b>"Where's Waldo".</b> </li>
+  <li>Player chooses one of three illustrated scenes and try to locate five hidden characters as quickly as possible. </li>
+  <li>When the player finds a character, they click on its position and select the correct character from the appeared menu. If the clicked coordinates match the character's position, that character is marked as found. </li>
+  <li>After finding all of the characters, player can submit their time to a global leaderboard backed by small Express + MongoDB API. </li>
+</ul>
 
 <h2>🕹️ Features</h2>
 <ul>
